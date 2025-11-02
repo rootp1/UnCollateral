@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnCollateral - Undercollateralized Lending</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>UnCollateral</h1>
+            <p>Get loans with less collateral using your social reputation</p>
+        </header>
+
+        <div class="wallet-section">
+            <button id="connectWallet" class="btn-primary">Connect Wallet</button>
+            <p id="walletAddress" class="wallet-address"></p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="reputation">Verify Reputation</button>
+            <button class="tab-btn" data-tab="borrow">Borrow</button>
+            <button class="tab-btn" data-tab="lend">Lend</button>
+            <button class="tab-btn" data-tab="loans">My Loans</button>
+        </div>
+
+        <!-- Reputation Tab -->
+        <div id="reputation" class="tab-content active">
+            <div class="card">
+                <h2>Verify Your Twitter Reputation</h2>
+                <p>Connect your Twitter account to get a reputation score that reduces your collateral requirements.</p>
+
+                <div id="reputationStatus" class="status-box">
+                    <p>Status: <span id="statusText">Not Verified</span></p>
+                    <p>Score: <span id="scoreText">-</span></p>
+                    <p>Required Collateral: <span id="collateralText">-</span></p>
+                </div>
+
+                <button id="verifyTwitter" class="btn-primary">Verify Twitter Account</button>
+
+                <div id="proofStatus" class="hidden">
+                    <p class="info-text">Generating proof...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Borrow Tab -->
+        <div id="borrow" class="tab-content">
+            <div class="card">
+                <h2>Request a Loan</h2>
+                <p>Borrow funds with reduced collateral based on your reputation.</p>
+
+                <form id="loanForm">
+                    <div class="form-group">
+                        <label>Loan Amount (USDC)</label>
+                        <input type="number" id="loanAmount" placeholder="1000" min="100" step="100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Duration (days)</label>
+                        <select id="loanDuration" required>
+                            <option value="7">7 days</option>
+                            <option value="14">14 days</option>
+                            <option value="30" selected>30 days</option>
+                            <option value="60">60 days</option>
+                            <option value="90">90 days</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Collateral Amount (ETH)</label>
+                        <input type="number" id="collateralAmount" placeholder="0.5" min="0" step="0.01" required>
+                    </div>
+
+                    <div id="loanTerms" class="info-box hidden">
+                        <p>Interest Rate: <span id="interestRate">-</span></p>
+                        <p>Total Repayment: <span id="totalRepayment">-</span></p>
+                        <p>Required Collateral: <span id="requiredCollateral">-</span></p>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Request Loan</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Lend Tab -->
+        <div id="lend" class="tab-content">
+            <div class="card">
+                <h2>Provide Liquidity</h2>
+                <p>Deposit funds into the lending pool and earn interest.</p>
+
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <p class="stat-label">Total Pool Size</p>
+                        <p class="stat-value" id="poolSize">-</p>
+                    </div>
+                    <div class="stat-item">
+                        <p class="stat-label">Available Liquidity</p>
+                        <p class="stat-value" id="availableLiquidity">-</p>
+                    </div>
+                    <div class="stat-item">
+                        <p class="stat-label">Your Deposits</p>
+                        <p class="stat-value" id="yourDeposits">-</p>
+                    </div>
+                    <div class="stat-item">
+                        <p class="stat-label">Earned Interest</p>
+                        <p class="stat-value" id="earnedInterest">-</p>
+                    </div>
+                </div>
+
+                <form id="depositForm">
+                    <div class="form-group">
+                        <label>Deposit Amount (USDC)</label>
+                        <input type="number" id="depositAmount" placeholder="1000" min="1" step="1" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Deposit</button>
+                </form>
+
+                <form id="withdrawForm">
+                    <div class="form-group">
+                        <label>Withdraw Amount (USDC) - 0 for all</label>
+                        <input type="number" id="withdrawAmount" placeholder="0" min="0" step="1">
+                    </div>
+                    <button type="submit" class="btn-secondary">Withdraw</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- My Loans Tab -->
+        <div id="loans" class="tab-content">
+            <div class="card">
+                <h2>My Loans</h2>
+                <div id="loansList">
+                    <p class="info-text">Connect your wallet to view your loans</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

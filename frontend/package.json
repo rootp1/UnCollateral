@@ -1,0 +1,22 @@
+{
+  "name": "uncollateral-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for UnCollateral - Undercollateralized lending platform",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "start": "python3 -m http.server 8000"
+  },
+  "keywords": [
+    "defi",
+    "lending",
+    "web3",
+    "reclaim-protocol"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@reclaimprotocol/js-sdk": "^latest"
+  },
+  "devDependencies": {},
+  "note": "This is a basic HTML/CSS/JS frontend. For production, consider using React/Vue/Vite with ethers.js"
+}
