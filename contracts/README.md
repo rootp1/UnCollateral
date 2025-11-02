@@ -1,66 +1,87 @@
-## Foundry
+# UnCollateral Smart Contracts
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Solidity smart contracts for the UnCollateral lending protocol, built with Foundry.
 
-Foundry consists of:
+## Overview
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+UnCollateral enables undercollateralized lending by using verified social reputation from Twitter (via Reclaim Protocol) to reduce collateral requirements.
 
-## Documentation
+## Contracts
 
-https://book.getfoundry.sh/
+- **ReputationManager**: Verifies Reclaim proofs and manages user reputation scores
+- **LendingPool**: Manages liquidity deposits and withdrawals
+- **LoanManager**: Handles loan lifecycle (creation, repayment, liquidation)
+- **InsurancePool**: Provides coverage for under-collateralized defaults
 
-## Usage
+## Quick Start
 
-### Build
+### Prerequisites
+
+Install Foundry:
+```shell
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
+```
+
+### Setup
 
 ```shell
-$ forge build
+# Install dependencies
+forge install
+
+# Copy environment template
+cp .env.example .env
+# Edit .env with your configuration
+
+# Build contracts
+forge build
 ```
 
 ### Test
 
 ```shell
-$ forge test
-```
+# Run all tests
+forge test
 
-### Format
+# Run with verbose output
+forge test -vvv
 
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
+# Generate coverage report
+forge coverage
 ```
 
 ### Deploy
 
 ```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+# Deploy to testnet
+forge script script/Deploy.s.sol --rpc-url $RPC_URL --broadcast
+
+# Deploy to mainnet (verify first!)
+forge script script/Deploy.s.sol --rpc-url $RPC_URL --broadcast --verify
 ```
 
-### Cast
+## Documentation
+
+- Main Docs: [../README.md](../README.md)
+- API Reference: [../docs/API.md](../docs/API.md)
+- Deployment Guide: [../docs/DEPLOYMENT.md](../docs/DEPLOYMENT.md)
+- Security: [../docs/SECURITY.md](../docs/SECURITY.md)
+- Foundry Book: https://book.getfoundry.sh/
+
+## Gas Reporting
 
 ```shell
-$ cast <subcommand>
+forge test --gas-report
 ```
 
-### Help
+## Foundry Commands
 
 ```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+forge --help       # General help
+forge build        # Compile contracts
+forge test         # Run tests
+forge fmt          # Format code
+forge snapshot     # Gas snapshots
+anvil              # Local testnet
+cast               # Blockchain utilities
 ```
